@@ -4,3 +4,9 @@ langserve[all]==0.2.2
 langchain-community==0.2.10
 python-dotenv==1.0.1
 cython==3.0.10
+
+azure-cognitiveservices-vision-computervision==0.9.0
+
+paddlepaddle==2.6.1
+paddleocr==2.8.0
+paddleclas==2.5.2

@@ -1,8 +1,14 @@
 import uvicorn
+from langserve import add_routes
+
 from core.server_settings import server_settings
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+from loguru import logger
+
+from runnable.azure_ocr_runnable import AzureOcrRunnable
+from runnable.paddle_ocr_runnable import PaddleOcrRunnable
 
 
 class Bootstrap:
@@ -21,7 +27,10 @@ class Bootstrap:
         )
 
     def setup_router(self):
-        pass
+        if server_settings.enable_azure_ocr:
+            logger.info('启动Azure OCR服务')
+            add_routes(self.app, AzureOcrRunnable().instance(), path='/azure_ocr')
+        add_routes(self.app, PaddleOcrRunnable().instance(), path='/paddle_ocr')
 
     def start(self):
         self.setup_middlewares()
