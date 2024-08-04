@@ -9,3 +9,4 @@ dist
 requirements.txt
 !requirements/requirements.txt
 models
+tests/asserts
